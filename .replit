@@ -1,0 +1,13 @@
+language = "python3"
+entrypoint = "server.py"
+run = "python server.py"
+
+[env]
+PYTHONPATH = "."
+
+[nix]
+channel = "stable-22_11"
+
+[deployment]
+run = ["python", "server.py"]
+deploymentTarget = "cloudrun" 

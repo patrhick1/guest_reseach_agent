@@ -1,0 +1,29 @@
+# Core dependencies
+fastapi>=0.103.1
+uvicorn>=0.23.2
+flask>=2.3.0
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+typing-extensions>=4.5.0
+requests>=2.31.0
+
+# LangChain/LLM Components
+langgraph>=0.0.2
+langchain-core>=0.0.10
+langchain-openai>=0.0.2
+langchain-community>=0.0.2
+langchain-google-genai>=0.0.1
+tiktoken>=0.4.0
+
+# Service Integrations
+aiohttp>=3.8.5
+apify-client>=1.0.0
+
+# Google API dependencies
+google-api-python-client>=2.100.0
+google-auth>=2.23.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+
+# Search API
+tavily-python>=0.2.8 

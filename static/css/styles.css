@@ -1,0 +1,559 @@
+/* Base styles and variables */
+:root {
+    --primary-color: #7c5cff;
+    --secondary-color: #5c86ff;
+    --accent-color: #ff5c8d;
+    --text-color: #333;
+    --light-text: #666;
+    --lighter-text: #999;
+    --background-color: #f9f9fb;
+    --card-background: #ffffff;
+    --border-color: #e1e1e8;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --warning-color: #ffc107;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --border-radius: 10px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: var(--light-text);
+    font-size: 1.1rem;
+}
+
+/* Main content sections */
+section {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.7rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #6a4fe0;
+    transform: translateY(-2px);
+}
+
+button.secondary {
+    background-color: #f5f5f7;
+    color: var(--light-text);
+}
+
+button.secondary:hover {
+    background-color: #e5e5e7;
+}
+
+.required {
+    color: var(--error-color);
+}
+
+.optional {
+    color: var(--lighter-text);
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+/* Results section */
+.research-results {
+    display: none;
+}
+
+.research-results.visible {
+    display: block;
+}
+
+.loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 200px;
+}
+
+.loader p {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    animation: pulse 1.5s infinite;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(124, 92, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.results-container {
+    display: none;
+}
+
+.results-container.visible {
+    display: block;
+}
+
+.result-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.result-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.result-card .info-row {
+    display: flex;
+    margin-bottom: 0.8rem;
+}
+
+.result-card .info-label {
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.result-card a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.result-card a:hover {
+    text-decoration: underline;
+    color: var(--primary-color);
+}
+
+/* Report Section Styles */
+.report-section {
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+}
+
+.report-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.report-actions .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+/* Tabbed interface styles */
+.tabs-container {
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tabs-nav {
+    display: flex;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-button {
+    padding: 12px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.2s ease;
+    flex: 1;
+    text-align: center;
+}
+
+.tab-button:hover {
+    background-color: #e9e9e9;
+    color: #333;
+}
+
+.tab-button.active {
+    background-color: #fff;
+    color: #4285f4;
+    border-bottom: 2px solid #4285f4;
+}
+
+.tab-content {
+    background-color: #fff;
+    min-height: 200px;
+}
+
+.tab-panel {
+    padding: 20px;
+    line-height: 1.6;
+    white-space: normal;
+}
+
+.results-header {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.results-header h2 {
+    margin-bottom: 8px;
+}
+
+.results-header a {
+    color: #4285f4;
+    text-decoration: none;
+}
+
+.results-header a:hover {
+    text-decoration: underline;
+}
+
+.doc-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.doc-link a {
+    color: #4285f4;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.doc-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive styles for tabs */
+@media (max-width: 600px) {
+    .tabs-nav {
+        flex-direction: column;
+    }
+    
+    .tab-button {
+        width: 100%;
+        text-align: left;
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .tab-button.active {
+        border-bottom: 1px solid #ddd;
+        border-left: 3px solid #4285f4;
+    }
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--lighter-text);
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    section {
+        padding: 1.5rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    section h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Debug Section Styles */
+.debug-section {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+.debug-section summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--lighter-text);
+    margin-bottom: 0.5rem;
+}
+
+.debug-section summary:hover {
+    color: var(--secondary-color);
+}
+
+.debug-info {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin-top: 0.5rem;
+}
+
+.debug-info p {
+    margin: 0.5rem 0;
+}
+
+/* Markdown content styles */
+.tab-panel h1, .tab-panel h2, .tab-panel h3 {
+    color: #333;
+    margin-top: 1.2em;
+    margin-bottom: 0.8em;
+}
+
+.tab-panel h1 {
+    font-size: 1.6em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.tab-panel h2 {
+    font-size: 1.4em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.tab-panel h3 {
+    font-size: 1.2em;
+}
+
+.tab-panel p {
+    margin-bottom: 1em;
+}
+
+.tab-panel ul, .tab-panel ol {
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+.tab-panel li {
+    margin-bottom: 0.5em;
+}
+
+.tab-panel code {
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    padding: 0.2em 0.4em;
+}
+
+.tab-panel pre {
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    padding: 16px;
+    overflow: auto;
+    margin-bottom: 1em;
+}
+
+.tab-panel pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.tab-panel a {
+    color: #4285f4;
+    text-decoration: none;
+}
+
+.tab-panel a:hover {
+    text-decoration: underline;
+}
+
+.tab-panel strong {
+    font-weight: 600;
+}
+
+.tab-panel em {
+    font-style: italic;
+}
+
+.tab-panel hr {
+    height: 1px;
+    background-color: #e1e4e8;
+    border: none;
+    margin: 1.5em 0;
+}
+
+/* Fix white-space property for formatted content */
+.tab-panel {
+    white-space: normal;
+}
+
+/* Research method selection */
+.research-method {
+    margin-bottom: 2rem;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: normal;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.radio-label:hover {
+    background-color: #f5f5f7;
+}
+
+.radio-label input[type="radio"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .radio-group {
+        flex-direction: row;
+        gap: 2rem;
+    }
+} 
