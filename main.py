@@ -1071,17 +1071,62 @@ class PodcastResearchEngine:
 
         # LLM call 4: Structure Previous Podcast Appearances
         appearances_prompt = f"""
-        Using the following information, create a well-structured Markdown section listing the guest's previous podcast appearances:
+        Based on the podcast appearances data below, create a formatted list of the guest's previous appearances.
+
+        For EACH podcast appearance:
+        1. Extract the image URL (which looks like https://cdn-images-*.listennotes.com/...)
+        2. Extract the podcast URL (which will be the URL to the podcast platform)
+        3. Extract the podcast title
         
+        Format each entry as follows (one per line):
+        PODCAST_TITLE||IMAGE_URL||PODCAST_URL
+        
+        For example:
+        The Growth Show||https://cdn-images-1.listennotes.com/podcasts/example.jpg||https://example.com/podcast
+        
+        Don't include any additional text, commentary, or formatting - just the formatted entries.
+        
+        Here's the data:
         {other_appearances}
-        
-        Format it with bullet points or a table if needed.
         """
         appearances_response = await self.clients.llm.ainvoke([
             SystemMessage(content=appearances_prompt),
             HumanMessage(content=f"Guest name: {guest_name}")
         ])
         appearances = appearances_response.content.strip()
+        
+        # Transform the LLM response into a more display-friendly format
+        try:
+            # Process the response into HTML for displaying images
+            formatted_appearances = []
+            for line in appearances.split('\n'):
+                if '||' in line:
+                    parts = line.split('||')
+                    if len(parts) == 3:
+                        title, image_url, podcast_url = parts
+                        formatted_appearances.append(f"""
+                        <div class="podcast-item">
+                            <a href="{podcast_url}" target="_blank">
+                                <img src="{image_url}" alt="{title}" title="{title}">
+                                <p>{title}</p>
+                            </a>
+                        </div>
+                        """)
+            
+            if formatted_appearances:
+                # Use proper HTML structure with grid container for research_detail.html compatibility
+                appearances = f"""<div class="podcast-grid">{''.join(formatted_appearances)}</div>"""
+                logger.info(f"Successfully formatted {len(formatted_appearances)} podcast appearances with HTML")
+            else:
+                # Fallback: if parsing failed, revert to the direct LLM output but add a special marker
+                # to indicate it should be treated as markdown
+                logger.warning("No appearances could be parsed from the response, using original format")
+                appearances = f"<!-- MARKDOWN_FORMAT -->\n{appearances}"
+        except Exception as e:
+            logger.warning(f"Failed to format appearances: {e}")
+            # Keep the original response if formatting fails, but mark it
+            appearances = f"<!-- MARKDOWN_FORMAT -->\n{appearances}"
+        
         state["appearance"] = appearances
 
         # Combine all parts into a final Markdown formatted report

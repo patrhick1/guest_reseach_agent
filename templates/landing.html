@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast Guest Research - Automate Your Guest Research</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .primary-cta {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .secondary-cta {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .testimonials {
+            padding: 4rem 2rem;
+            background: var(--background-color);
+            text-align: center;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-bar">
+            <div class="nav-brand">
+                <i class="fas fa-podcast"></i> Podcast Guest Research
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+                <a href="{{ url_for('register') }}" class="nav-link">Register</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>Automate Your Podcast Guest Research</h1>
+            <p>Save hours of manual research. Get comprehensive guest profiles in minutes.</p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('register') }}" class="cta-button primary-cta">Get Started Free</a>
+                <a href="{{ url_for('login') }}" class="cta-button secondary-cta">Login</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-bolt feature-icon"></i>
+                <h3>Lightning Fast Research</h3>
+                <p>Get comprehensive guest profiles in minutes, not hours. Our AI-powered system does the heavy lifting.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-search feature-icon"></i>
+                <h3>Deep Social Analysis</h3>
+                <p>Automatically analyze social media profiles and past content to understand your guests better.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-file-alt feature-icon"></i>
+                <h3>Detailed Reports</h3>
+                <p>Receive well-organized reports with key insights, talking points, and conversation starters.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-users feature-icon"></i>
+                <h3>Create Your Account</h3>
+                <p>Sign up to save all your research, manage multiple podcast guests, and access your work from anywhere.</p>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2>What Podcasters Say</h2>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"This tool has completely transformed how I prepare for interviews. What used to take me hours now takes minutes."</p>
+                <p class="testimonial-author">- Sarah Chen, Tech Talk Daily</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The depth of research and organization of information is incredible. It helps me conduct much more engaging interviews."</p>
+                <p class="testimonial-author">- Mike Johnson, The Startup Show</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 

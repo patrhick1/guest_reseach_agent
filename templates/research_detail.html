@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ research.guest_name }} - Research Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .research-detail {
+            padding: 2rem 0;
+        }
+        .research-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        .research-title {
+            margin-top: 0;
+        }
+        .guest-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .action-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            background: var(--primary-color);
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        .document-button {
+            background-color: #4285F4;
+        }
+        .download-button {
+            background-color: #34A853;
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .research-meta {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Podcast appearances styling */
+        .podcast-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .podcast-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .podcast-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .podcast-item img {
+            width: 130px;
+            height: 130px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+        
+        .podcast-item a {
+            text-decoration: none;
+            color: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .podcast-item p {
+            font-size: 0.85rem;
+            margin: 5px 0;
+            line-height: 1.3;
+            color: var(--text-color);
+            font-weight: 500;
+            max-width: 140px;
+        }
+        
+        /* Regular markdown image styling */
+        .markdown-content img {
+            max-width: 130px;
+            max-height: 130px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .markdown-content a img {
+            width: 130px;
+            height: 130px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            margin: 10px;
+            transition: transform 0.2s ease;
+        }
+        
+        .markdown-content a img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Fix for Markdown content */
+        .markdown-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .markdown-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .markdown-content ul {
+            padding-left: 20px;
+        }
+        
+        .markdown-content li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="research-detail">
+            <a href="{{ url_for('dashboard') }}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            
+            <div class="research-header">
+                <div>
+                    <h1 class="research-title">{{ research.episode_title }}</h1>
+                    {% if research.guest_name %}
+                    <div class="guest-badge">
+                        <i class="fas fa-user"></i> {{ research.guest_name }}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="action-buttons">
+                    {% if research.document_url %}
+                    <a href="{{ research.document_url }}" target="_blank" class="action-button document-button">
+                        <i class="fas fa-file-alt"></i> View Document
+                    </a>
+                    {% if doc_id %}
+                    <a href="https://docs.google.com/document/d/{{ doc_id }}/export?format=pdf" target="_blank" class="action-button download-button">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Research Meta</h3>
+                <div class="research-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i> 
+                        <span>Researched on {{ research.created_at.strftime('%B %d, %Y at %I:%M %p') }}</span>
+                    </div>
+                    
+                    <div class="meta-item">
+                        <i class="fas fa-tag"></i> 
+                        <span>Status: <strong>{{ research.status }}</strong></span>
+                    </div>
+                    
+                    {% if research.linkedin_url %}
+                    <div class="meta-item">
+                        <i class="fab fa-linkedin"></i> 
+                        <a href="{{ research.linkedin_url }}" target="_blank">LinkedIn Profile</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            {% if research.introduction %}
+            <div class="section">
+                <h3>Introduction</h3>
+                <div class="markdown-content">
+                    {{ research.introduction | safe }}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if research.summary %}
+            <div class="section">
+                <h3>Summary</h3>
+                <div class="markdown-content">
+                    {{ research.summary | safe }}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if research.questions %}
+            <div class="section">
+                <h3>Question Suggestions</h3>
+                <div class="markdown-content">
+                    {{ research.questions | safe }}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if research.appearances %}
+            <div class="section">
+                <h3>Previous Appearances</h3>
+                <div class="markdown-content">
+                    {{ research.appearances | safe }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Process markdown content when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find all markdown content elements and convert them
+            const markdownElements = document.querySelectorAll('.markdown-content');
+            
+            markdownElements.forEach(element => {
+                // Check if this is the appearances section
+                const isAppearances = element.parentElement.querySelector('h3')?.textContent === 'Previous Appearances';
+                
+                // Special handling for appearances section - it almost always contains HTML
+                if (isAppearances) {
+                    // If it contains podcast-grid or podcast-item or img tags, it's already HTML
+                    const content = element.innerHTML;
+                    const hasHtmlTags = /<[a-z][\s\S]*>/i.test(content);
+                    const hasImageTags = /<img[^>]+>/i.test(content);
+                    const hasPodcastGrid = content.includes('<div class="podcast-grid">');
+                    const hasPodcastItem = content.includes('<div class="podcast-item">');
+                    
+                    if (hasHtmlTags || hasImageTags || hasPodcastGrid || hasPodcastItem) {
+                        // It's already properly formatted HTML, leave it as is
+                        console.log('Appearances section contains HTML, keeping as is');
+                        return;
+                    }
+                    
+                    // If we get here, it's not HTML but plain text that needs conversion
+                    const textContent = element.textContent;
+                    
+                    // Check for special markdown marker
+                    let contentToConvert = textContent;
+                    if (contentToConvert.includes('<!-- MARKDOWN_FORMAT -->')) {
+                        contentToConvert = contentToConvert.replace('<!-- MARKDOWN_FORMAT -->', '');
+                    }
+                    
+                    // Convert to HTML if we have the function
+                    if (contentToConvert && typeof convertMarkdownToHtml === 'function') {
+                        element.innerHTML = convertMarkdownToHtml(contentToConvert);
+                    }
+                    return;
+                }
+                
+                // For non-appearances sections
+                // Get the content
+                let content = element.innerHTML;
+                
+                // Improved HTML detection - check if content actually contains HTML tags
+                const containsHtml = /<[a-z][\s\S]*>/i.test(content);
+                
+                // If it already has HTML, don't process it
+                if (containsHtml) {
+                    return;
+                }
+                
+                // At this point, we're sure it's not HTML content, so get the text
+                content = element.textContent;
+                
+                // Check for our special markdown marker
+                if (content.includes('<!-- MARKDOWN_FORMAT -->')) {
+                    content = content.replace('<!-- MARKDOWN_FORMAT -->', '');
+                }
+                
+                // Convert the content using the app.js function
+                if (content && typeof convertMarkdownToHtml === 'function') {
+                    element.innerHTML = convertMarkdownToHtml(content);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
